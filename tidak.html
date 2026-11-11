@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Tidak Aktif</title>
+    <!-- Memuat Tailwind CSS untuk tata letak responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat font Inter dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Mengatur font default dan latar belakang biru dongker gelap dengan garis diagonal sangat halus */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #111928;
+            background-image: 
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(255, 255, 255, 0.015) 0px,
+                    rgba(255, 255, 255, 0.015) 2px,
+                    transparent 2px,
+                    transparent 24px
+                ),
+                linear-gradient(135deg, #0f172a 0%, #162033 100%);
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Gaya kartu di tengah layar */
+        .status-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            padding: 64px 32px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Lingkaran wadah ikon perisai */
+        .icon-circle {
+            width: 64px;
+            height: 64px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4 sm:p-6">
+
+    <!-- Kartu Status Utama -->
+    <main class="status-card text-center">
+        <!-- Ikon Perisai (Shield Outline) -->
+        <div class="icon-circle" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-[#94a3b8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+        </div>
+
+        <!-- Judul -->
+        <h1 class="text-white font-bold text-[1.35rem] mt-6 tracking-tight">
+            Halaman Tidak Aktif
+        </h1>
+
+        <!-- Teks Deskripsi -->
+        <p class="text-[#94a3b8] text-base leading-relaxed mt-3">
+            Maaf, akses ke halaman ini ditangguhkan.
+        </p>
+    </main>
+
+</body>
+</html>
