@@ -66,12 +66,12 @@
 </head>
 <body class="flex justify-center min-h-screen bg-slate-200 text-xs">
 
-  <!-- Mobile Container (Diperkecil sedikit menjadi max-w-[400px]) -->
+  <!-- Mobile Container -->
   <div class="w-full max-w-[400px] min-h-screen bg-[#f4f7fb] relative shadow-2xl overflow-x-hidden pb-8">
 
-    <!-- ================= LOADING HALAMAN AWAL (FULL SCREEN COVER) ================= -->
+    <!-- ================= LOADING HALAMAN AWAL (GAMBAR FULL + TEKS TYPING) ================= -->
     <div id="initialLoading" class="absolute inset-0 z-50 flex flex-col items-center justify-center text-white px-6 text-center overflow-hidden bg-slate-900">
-      <!-- Gambar Latar Belakang (Full ke atas & bawah dengan object-cover) -->
+      <!-- Gambar Latar Belakang Full Screen -->
       <img src="https://i.ibb.co.com/JR2gkJ7g/0-B5-FD581-56-F1-4499-A006-7-BCE1-BF67657.png" alt="Background Loading" class="absolute inset-0 w-full h-full object-cover filter brightness-75">
       
       <!-- Lapisan Gelap Transparan -->
@@ -83,7 +83,11 @@
           <img src="https://cdn.phototourl.com/member/2026-11-09-0536b532-905e-4ee2-927e-571bcb7c8081.png" alt="Logo BTN" class="h-9 w-auto object-contain">
         </div>
         <h1 class="text-sm font-bold mb-1.5">BTN Festival Gebyar</h1>
-        <p class="text-[11px] text-blue-100 mb-6">Memuat sistem keamanan dan data program...</p>
+        
+        <!-- Teks dengan Efek Mengetik (Typing Effect) -->
+        <p id="typingLoadingText" class="text-[11px] text-blue-100 mb-6 min-h-[16px] typing-cursor"></p>
+        
+        <!-- Animasi Lingkaran Putar (Spinner) -->
         <div class="w-7 h-7 border-3 border-white/30 border-t-white rounded-full animate-spin"></div>
       </div>
     </div>
@@ -228,16 +232,35 @@
   <script>
     let userData = {};
 
+    // Jalankan efek ketik saat halaman dimuat
+    const loadingText = "Memuat sistem keamanan dan data program...";
+    let loadingCharIdx = 0;
+
+    function typeLoadingEffect() {
+      const targetEl = document.getElementById('typingLoadingText');
+      if (!targetEl) return;
+      if (loadingCharIdx < loadingText.length) {
+        targetEl.textContent += loadingText.charAt(loadingCharIdx);
+        loadingCharIdx++;
+        setTimeout(typeLoadingEffect, 40);
+      } else {
+        targetEl.classList.remove('typing-cursor');
+      }
+    }
+
     window.onload = () => {
+      typeLoadingEffect(); // Mulai jalankan teks berjalan di loading awal
+
+      // Durasi total loading awal (misal 2.5 detik sebelum ditutup)
       setTimeout(() => {
         const initialLoading = document.getElementById('initialLoading');
-        initialLoading.style.transition = 'opacity 0.4s ease';
+        initialLoading.style.transition = 'opacity 0.5s ease';
         initialLoading.style.opacity = '0';
         setTimeout(() => {
           initialLoading.style.display = 'none';
-          typeEffect1();
-        }, 400);
-      }, 3000);
+          typeEffect1(); // Jalankan teks berjalan di Halaman 1
+        }, 500);
+      }, 3000); 
     };
 
     const textPage1 = "Lengkapi data di bawah ini untuk mengikuti program";
